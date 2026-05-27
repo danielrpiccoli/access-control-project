@@ -1,0 +1,28 @@
+# Target - Compilação do Maven (Nunca deve ir para o Git)
+**/target/
+*.class
+
+# Arquivos de Log
+*.log
+
+# Ferramentas do Maven
+.mtj.tmp/
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Configurações de IDEs (VS Code, IntelliJ, Eclipse)
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+.factorypath
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db
