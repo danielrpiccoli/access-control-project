@@ -14,6 +14,8 @@ import access_control.entity.AppUser;
 import access_control.entity.Space;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class SchedulingService {
@@ -55,6 +57,36 @@ public class SchedulingService {
         response.setUser(appUserMapper.toResponseDTO(saved.getUser()));
         response.setSpace(spaceMapper.toResponseDTO(saved.getSpace()));
 
+        return response;
+    }
+
+    public List<SchedulingResponseDTO> getAllSchedulings() {
+        List<Scheduling> schedulings = schedulingRepository.findAll();
+        List<SchedulingResponseDTO> response = new ArrayList<>();
+        for (Scheduling scheduling : schedulings) {
+            SchedulingResponseDTO dto = new SchedulingResponseDTO();
+            dto.setId(scheduling.getId());
+            dto.setScheduledDate(scheduling.getScheduledDate());
+            dto.setStartTime(scheduling.getStartTime());
+            dto.setEndTime(scheduling.getEndTime());
+            dto.setStatus(scheduling.getStatus());
+            dto.setUser(appUserMapper.toResponseDTO(scheduling.getUser()));
+            dto.setSpace(spaceMapper.toResponseDTO(scheduling.getSpace()));
+            response.add(dto);
+        }
+        return response;
+    }
+
+    public SchedulingResponseDTO getSchedulingById(Long id) {
+        Scheduling scheduling = schedulingRepository.findById(id).orElseThrow();
+        SchedulingResponseDTO response = new SchedulingResponseDTO();
+        response.setId(scheduling.getId());
+        response.setScheduledDate(scheduling.getScheduledDate());
+        response.setStartTime(scheduling.getStartTime());
+        response.setEndTime(scheduling.getEndTime());
+        response.setStatus(scheduling.getStatus());
+        response.setUser(appUserMapper.toResponseDTO(scheduling.getUser()));
+        response.setSpace(spaceMapper.toResponseDTO(scheduling.getSpace()));
         return response;
     }
 }
