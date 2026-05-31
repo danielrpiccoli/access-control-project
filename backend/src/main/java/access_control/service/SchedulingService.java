@@ -6,6 +6,7 @@ import access_control.dto.AppUserResponseDTO;
 import access_control.dto.SpaceResponseDTO;
 import access_control.entity.Scheduling;
 import access_control.mapper.AppUserMapper;
+import access_control.mapper.SpaceMapper;
 import access_control.repository.AppUserRepository;
 import access_control.repository.SchedulingRepository;
 import access_control.repository.SpaceRepository;
@@ -46,7 +47,7 @@ public class SchedulingService {
         response.setEndTime(saved.getEndTime());
         response.setStatus(saved.getStatus());
         response.setUser(appUserMapper.toResponseDTO(saved.getUser()));
-        response.setSpace(toSpaceResponse(saved.getSpace()));
+        response.setSpace(spaceMapper.toResponseDTO(saved.getSpace()));
 
         return response;
     }
@@ -54,13 +55,6 @@ public class SchedulingService {
     @Autowired
     private AppUserMapper appUserMapper;
 
-    private SpaceResponseDTO toSpaceResponse(Space space) {
-        SpaceResponseDTO response = new SpaceResponseDTO();
-        response.setId(space.getId());
-        response.setName(space.getName());
-        response.setCapacity(space.getCapacity());
-        response.setDescription(space.getDescription());
-        response.setStatus(space.getStatus());
-        return response;
-    }
+    @Autowired
+    private SpaceMapper spaceMapper;
 }
