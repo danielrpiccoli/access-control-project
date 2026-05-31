@@ -25,14 +25,16 @@ public class AccessLogService {
 
         AccessLog accessLog = new AccessLog();
         accessLog.setScheduling(scheduling);
+        accessLog.setEntryTimestamp(LocalDateTime.now());
+        accessLog.setSuccess(true);
 
         AccessLog saved = accessLogRepository.save(accessLog);
 
         AccessLogResponseDTO response = new AccessLogResponseDTO();
         response.setId(saved.getId());
-        response.setEntryTimestamp(LocalDateTime.now());
-        response.setSuccess(true);
-        response.setScheduling(schedulingMapper.toRespoonseDTO(saved.getScheduling()));
+        response.setEntryTimestamp(saved.getEntryTimestamp());
+        response.setSuccess(saved.isSuccess());
+        response.setScheduling(schedulingMapper.toResponseDTO(saved.getScheduling()));
 
         return response;
     }

@@ -14,7 +14,7 @@ public class SchedulingMapper {
     @Autowired
     private SpaceMapper spaceMapper;
 
-    public SchedulingResponseDTO toRespoonseDTO(Scheduling scheduling) {
+    public SchedulingResponseDTO toResponseDTO(Scheduling scheduling) {
         SchedulingResponseDTO response = new SchedulingResponseDTO();
         response.setId(scheduling.getId());
         response.setScheduledDate(scheduling.getScheduledDate());
