@@ -3,6 +3,7 @@ package access_control.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "AppUser")
 public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

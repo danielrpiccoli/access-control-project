@@ -4,12 +4,13 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "AccessLog")
 public class AccessLog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "entry_timestamp")
     private LocalDateTime entryTimestamp;
 
     @Column(nullable = false)

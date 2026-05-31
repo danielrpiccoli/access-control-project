@@ -3,6 +3,7 @@ package access_control.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "Space")
 public class Space {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
