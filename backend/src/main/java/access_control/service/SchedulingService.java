@@ -26,6 +26,12 @@ public class SchedulingService {
     @Autowired
     private SchedulingRepository schedulingRepository;
 
+    @Autowired
+    private AppUserMapper appUserMapper;
+
+    @Autowired
+    private SpaceMapper spaceMapper;
+
     public SchedulingResponseDTO createScheduling(SchedulingRequestDTO dto) {
         AppUser user = appUserRepository.findById(dto.getUserId()).orElseThrow();
         Space space = spaceRepository.findById(dto.getSpaceId()).orElseThrow();
@@ -51,10 +57,4 @@ public class SchedulingService {
 
         return response;
     }
-
-    @Autowired
-    private AppUserMapper appUserMapper;
-
-    @Autowired
-    private SpaceMapper spaceMapper;
 }
