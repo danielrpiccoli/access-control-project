@@ -32,16 +32,4 @@ public class AppUserController {
         AppUserResponseDTO response = appUserService.getUserById(id);
         return ResponseEntity.ok(response);
     }
-
-    @PostMapping("/auth/register")
-    public ResponseEntity<AppUserResponseDTO> register(@RequestBody AppUserRequestDTO dto) {
-        AppUserResponseDTO response = appUserService.createUser(dto);
-        return ResponseEntity.status(201).body(response);
-    }
-
-    @PostMapping("/auth/login")
-    public ResponseEntity<String> login(@RequestBody AppUserRequestDTO dto) {
-        String token = appUserService.loginUser(dto);
-        return ResponseEntity.ok(token);
-    }
 }
