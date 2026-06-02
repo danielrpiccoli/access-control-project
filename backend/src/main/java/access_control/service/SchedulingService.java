@@ -2,8 +2,6 @@ package access_control.service;
 
 import access_control.dto.SchedulingRequestDTO;
 import access_control.dto.SchedulingResponseDTO;
-import access_control.dto.AppUserResponseDTO;
-import access_control.dto.SpaceResponseDTO;
 import access_control.entity.Scheduling;
 import access_control.mapper.AppUserMapper;
 import access_control.mapper.SpaceMapper;

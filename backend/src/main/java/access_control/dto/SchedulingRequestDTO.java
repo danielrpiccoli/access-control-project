@@ -1,7 +1,5 @@
 package access_control.dto;
 
-import org.springframework.cglib.core.Local;
-
 import java.time.LocalTime;
 import java.time.LocalDate;
 
