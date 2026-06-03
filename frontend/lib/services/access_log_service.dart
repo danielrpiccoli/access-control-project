@@ -1,5 +1,3 @@
-//createAccessLog(int schedulingId)
-//getAccessLogById(int id)
 import 'dart:convert';
 import 'package:frontend/models/access_log.dart';
 import 'package:http/http.dart' as http;
@@ -26,9 +24,6 @@ class AccessLogService {
 
   Future<AccessLog?> createAccessLog({
     required int schedulingId,
-    required int userId,
-    required int spaceId,
-    required String entryTimeStamp,
   }) async {
     final token = await authService.getToken();
 
@@ -39,10 +34,7 @@ class AccessLogService {
         'Authorization': 'Bearer $token',
       },
       body: jsonEncode({
-        'userId': userId,
-        'spaceId': spaceId,
         'schedulingId': schedulingId,
-        'entryTimeStamp': entryTimeStamp,
       }),
     );
     if (response.statusCode == 201) {
