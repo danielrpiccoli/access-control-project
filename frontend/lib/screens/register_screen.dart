@@ -62,6 +62,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               controller: passwordController,
               decoration: const InputDecoration(labelText: 'Password'),
               obscureText: true,
+              onSubmitted: (_) => handleRegister(),
             ),
             const SizedBox(height: 24),
             if (errorMessage != null)

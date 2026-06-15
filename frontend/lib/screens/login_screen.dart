@@ -54,6 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
               controller: passwordController,
               decoration: const InputDecoration(labelText: 'Password'),
               obscureText: true,
+              onSubmitted: (_) => handleLogin(),
             ),
             const SizedBox(height: 24),
             if (errorMessage != null)
@@ -67,6 +68,8 @@ class _LoginScreenState extends State<LoginScreen> {
               child: const Text('Don\'t have an account? Register'),
             ),
           ],
-        ),),);
+        ),
+      ),
+    );
   }
 }
