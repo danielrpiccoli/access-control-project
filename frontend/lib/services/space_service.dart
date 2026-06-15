@@ -4,8 +4,8 @@ import 'package:frontend/models/space.dart';
 import 'package:frontend/services/auth_service.dart';
 
 class SpaceService {
-  final String baseUrl = 'http://localhost:8080';
-  final AuthService authService = AuthService();
+final String baseUrl = 'http://192.168.0.37:8080';
+final AuthService authService = AuthService();
 
   Future<List<Space>> getAllSpaces() async {
     final token = await authService.getToken();
