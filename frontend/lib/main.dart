@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/home_screen.dart';
 import 'package:frontend/screens/login_screen.dart';
-import 'package:frontend/screens/register_screen.dart'
-;
+import 'package:frontend/screens/register_screen.dart';
+import 'package:frontend/screens/booking_screen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginScreen(),
         '/home': (context) => HomeScreen(),
         '/register': (context) => RegisterScreen(),
+        '/booking': (context) => BookingScreen(),
       },
     );
   }
