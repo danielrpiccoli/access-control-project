@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:frontend/services/auth_service.dart';
 
 class SchedulingService {
-final String baseUrl = 'http://192.168.0.37:8080';
+final String baseUrl = 'http://localhost:8080';
 final AuthService authService = AuthService();
 
   Future<List<Scheduling>> getAllSchedulings() async {
