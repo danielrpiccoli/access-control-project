@@ -73,4 +73,14 @@ public class AppUserService {
         }
         return jwtUtil.generateToken(user.getEmail());
     }
+
+    public AppUserResponseDTO getUserByEmail(String email) {
+        AppUser user = appUserRepository.findByEmail(email);
+        AppUserResponseDTO response = new AppUserResponseDTO();
+        response.setId(user.getId());
+        response.setName(user.getName());
+        response.setEmail(user.getEmail());
+        response.setRole(user.getRole());
+        return response;
+    }
 }

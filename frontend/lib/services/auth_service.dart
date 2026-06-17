@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:frontend/models/app_user.dart';
 
 class AuthService {
 final String baseUrl = 'http://localhost:8080';
@@ -42,5 +43,20 @@ final String baseUrl = 'http://localhost:8080';
   Future<void> logout() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('token');
+  }
+
+  Future<AppUser?> getCurrentUser() async {
+    final token = await getToken();
+    final response = await http.get(
+        Uri.parse('$baseUrl/auth/me'),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer $token',
+        },
+    );
+    if (response.statusCode == 200) {
+        return AppUser.fromJson(jsonDecode(response.body));
+    }
+    return null;
   }
 }
