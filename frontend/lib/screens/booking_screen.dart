@@ -135,7 +135,7 @@ class _BookingScreenState extends State<BookingScreen> {
             ),
             ListTile(
               title: Text(selectedStartTime == null
-                ? 'Selected Start Time'
+                ? 'Select Start Time'
                 : formatTime(selectedStartTime!)),
               leading: const Icon(Icons.access_time),
               onTap: pickStartTime,
