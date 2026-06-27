@@ -67,14 +67,16 @@ class _BookingScreenState extends State<BookingScreen> {
 
     final token = await authService.getToken();
     if (token == null) {
+      setState(() => isLoading = false);
       Navigator.pushReplacementNamed(context, '/login');
       return;
     }
 
     final currentUser = await authService.getCurrentUser();
     if (currentUser == null) {
-        Navigator.pushReplacementNamed(context, '/login');
-        return;
+      setState(() => isLoading = false);
+      Navigator.pushReplacementNamed(context, '/login');
+      return;
     }
 
     final scheduling = await schedulingService.createScheduling(

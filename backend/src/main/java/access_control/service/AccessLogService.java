@@ -28,7 +28,7 @@ public class AccessLogService {
         AccessLog accessLog = new AccessLog();
         accessLog.setScheduling(scheduling);
         accessLog.setEntryTimestamp(LocalDateTime.now());
-        accessLog.setSuccess(true);
+        accessLog.setSuccess(dto.isSuccess());
 
         AccessLog saved = accessLogRepository.save(accessLog);
 

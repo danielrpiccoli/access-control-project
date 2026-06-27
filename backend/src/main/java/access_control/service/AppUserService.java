@@ -76,6 +76,9 @@ public class AppUserService {
 
     public AppUserResponseDTO getUserByEmail(String email) {
         AppUser user = appUserRepository.findByEmail(email);
+        if (user == null) {
+            throw new RuntimeException("User not found: " + email);
+        }
         AppUserResponseDTO response = new AppUserResponseDTO();
         response.setId(user.getId());
         response.setName(user.getName());

@@ -16,7 +16,7 @@ class AccessLog {
   factory AccessLog.fromJson(Map<String, dynamic> json) {
     return AccessLog(
       id: json['id'],
-      entryTimeStamp: DateTime.parse(json['entryTimeStamp']),
+      entryTimeStamp: DateTime.parse(json['entryTimestamp']),
       success: json['success'],
       scheduling: Scheduling.fromJson(json['scheduling']),
       );
