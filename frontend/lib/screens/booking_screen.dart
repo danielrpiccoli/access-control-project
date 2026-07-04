@@ -99,7 +99,7 @@ class _BookingScreenState extends State<BookingScreen> {
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
-                Navigator.pushReplacementNamed(conetxt, '/home');
+                Navigator.pushReplacementNamed(context, '/home');
               },
               child: const Text('Ok'),
             ),
