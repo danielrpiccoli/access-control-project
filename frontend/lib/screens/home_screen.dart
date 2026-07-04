@@ -42,6 +42,10 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Available Spaces'),
         actions: [
           IconButton(
+            icon: const Icon(Icons.calendar_today),
+            onPressed: () => Navigator.pushNamed(context, '/schedulings'),
+          ),
+          IconButton(
             icon: const Icon(Icons.logout),
             onPressed: handleLogout,
           ),
