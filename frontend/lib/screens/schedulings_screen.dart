@@ -5,14 +5,14 @@ import 'package:frontend/services/auth_service.dart';
 import 'package:frontend/services/scheduling_service.dart';
 import 'package:frontend/services/access_log_service.dart';
 
-class SchedulingScreen extends StatefulWidget {
-  const SchedulingScreen({super.key});
+class SchedulingsScreen extends StatefulWidget {
+  const SchedulingsScreen({super.key});
 
   @override
-  State<SchedulingScreen> createState() => _SchedulingsScreenState();
+  State<SchedulingsScreen> createState() => _SchedulingsScreenState();
 }
 
-class _SchedulingsScreenState extends State<SchedulingScreen> {
+class _SchedulingsScreenState extends State<SchedulingsScreen> {
   final AuthService authService = AuthService();
   final SchedulingService schedulingService = SchedulingService();
   final AccessLogService accessLogService = AccessLogService();
@@ -51,7 +51,7 @@ class _SchedulingsScreenState extends State<SchedulingScreen> {
         builder: (context) => AlertDialog(
           title: const Text('Access Granted.'),
           content: Text(
-            'You entered ${scheduling.space.name} at ${accessLog.entryTimeStamp.hour.toString().padLeft(2, '0')}:${accessLog.entryTimeStamp.minute.toString().padLeft(2, '0')}'),
+            "You entered ${scheduling.space.name} at ${accessLog.entryTimeStamp.hour.toString().padLeft(2, '0')}:${accessLog.entryTimeStamp.minute.toString().padLeft(2, '0')}"),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
