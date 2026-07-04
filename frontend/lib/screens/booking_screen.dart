@@ -90,7 +90,22 @@ class _BookingScreenState extends State<BookingScreen> {
     setState(() => isLoading = false);
 
     if (scheduling != null) {
-      Navigator.pushReplacementNamed(context, '/home');
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Booking Confirmed'),
+          content: const Text('Your space has been booked successfully'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(conetxt, '/home');
+              },
+              child: const Text('Ok'),
+            ),
+          ],
+        ),
+      );
     }
     else {
       setState(() => errorMessage = 'Booking failed. Please try again');
