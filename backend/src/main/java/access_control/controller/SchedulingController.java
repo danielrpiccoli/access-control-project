@@ -35,4 +35,12 @@ public class SchedulingController {
         SchedulingResponseDTO response = schedulingService.getSchedulingById(id);
         return ResponseEntity.ok(response);
     }
+
+    @PutMapping("/{id}/cancel")
+    public ResponseEntity<SchedulingResponseDTO> cancelScheduling(
+            @PathVariable Long id,
+            Authentication authentication) {
+        SchedulingResponseDTO response = schedulingService.cancelScheduling(id, authentication.getName());
+        return ResponseEntity.ok(response);
+    }
 }
