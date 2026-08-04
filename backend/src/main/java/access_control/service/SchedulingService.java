@@ -36,6 +36,16 @@ public class SchedulingService {
         AppUser user = appUserRepository.findByEmail(email);
         Space space = spaceRepository.findById(dto.getSpaceId()).orElseThrow();
 
+        if (!dto.getStartTime().isBefore(dto.getEndTime())) {
+            throw new IllegalArgumentException("startTime must be before endTime");
+        }
+
+        List<Scheduling> overlapping = schedulingRepository.findOverlapping(
+                space, dto.getScheduledDate(), dto.getStartTime(), dto.getEndTime());
+        if (!overlapping.isEmpty()) {
+            throw new IllegalStateException("Space is already booked for this time slot");
+        }
+
         Scheduling scheduling = new Scheduling();
         scheduling.setScheduledDate(dto.getScheduledDate());
         scheduling.setStartTime(dto.getStartTime());
