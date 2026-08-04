@@ -7,6 +7,7 @@ import access_control.repository.AccessLogRepository;
 import access_control.repository.AppUserRepository;
 import access_control.repository.SchedulingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,13 +27,23 @@ public class AccessLogService {
     @Autowired
     private SchedulingMapper schedulingMapper;
 
-    public AccessLogResponseDTO createAccessLog(AccessLogRequestDTO dto) {
+    public AccessLogResponseDTO createAccessLog(AccessLogRequestDTO dto, String email) {
         Scheduling scheduling = schedulingRepository.findById(dto.getSchedulingId()).orElseThrow();
+        AppUser requester = appUserRepository.findByEmail(email);
+
+        if (!scheduling.getUser().getId().equals(requester.getId())) {
+            throw new AccessDeniedException("This scheduling does not belong to you");
+        }
+
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime windowStart = LocalDateTime.of(scheduling.getScheduledDate(), scheduling.getStartTime());
+        LocalDateTime windowEnd = LocalDateTime.of(scheduling.getScheduledDate(), scheduling.getEndTime());
+        boolean withinWindow = !now.isBefore(windowStart) && !now.isAfter(windowEnd);
 
         AccessLog accessLog = new AccessLog();
         accessLog.setScheduling(scheduling);
-        accessLog.setEntryTimestamp(LocalDateTime.now());
-        accessLog.setSuccess(dto.isSuccess());
+        accessLog.setEntryTimestamp(now);
+        accessLog.setSuccess(withinWindow);
 
         AccessLog saved = accessLogRepository.save(accessLog);
 

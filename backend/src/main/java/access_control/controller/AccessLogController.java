@@ -17,8 +17,10 @@ public class AccessLogController {
     private AccessLogService accessLogService;
 
     @PostMapping
-    public ResponseEntity<AccessLogResponseDTO> createAccessLog(@RequestBody AccessLogRequestDTO dto) {
-        AccessLogResponseDTO response = accessLogService.createAccessLog(dto);
+    public ResponseEntity<AccessLogResponseDTO> createAccessLog(
+            @RequestBody AccessLogRequestDTO dto,
+            Authentication authentication) {
+        AccessLogResponseDTO response = accessLogService.createAccessLog(dto, authentication.getName());
         return ResponseEntity.status(201).body(response);
     }
 
