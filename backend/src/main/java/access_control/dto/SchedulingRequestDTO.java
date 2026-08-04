@@ -7,7 +7,6 @@ public class SchedulingRequestDTO {
     private LocalDate scheduledDate;
     private LocalTime startTime;
     private LocalTime endTime;
-    private Long userId;
     private Long spaceId;
 
     public LocalDate getScheduledDate() {
@@ -32,14 +31,6 @@ public class SchedulingRequestDTO {
 
     public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public Long getSpaceId() {

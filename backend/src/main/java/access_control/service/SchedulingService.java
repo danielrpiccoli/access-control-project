@@ -32,8 +32,8 @@ public class SchedulingService {
     @Autowired
     private SpaceMapper spaceMapper;
 
-    public SchedulingResponseDTO createScheduling(SchedulingRequestDTO dto) {
-        AppUser user = appUserRepository.findById(dto.getUserId()).orElseThrow();
+    public SchedulingResponseDTO createScheduling(SchedulingRequestDTO dto, String email) {
+        AppUser user = appUserRepository.findByEmail(email);
         Space space = spaceRepository.findById(dto.getSpaceId()).orElseThrow();
 
         Scheduling scheduling = new Scheduling();
