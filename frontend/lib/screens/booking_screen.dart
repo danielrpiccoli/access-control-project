@@ -72,15 +72,7 @@ class _BookingScreenState extends State<BookingScreen> {
       return;
     }
 
-    final currentUser = await authService.getCurrentUser();
-    if (currentUser == null) {
-      setState(() => isLoading = false);
-      Navigator.pushReplacementNamed(context, '/login');
-      return;
-    }
-
     final scheduling = await schedulingService.createScheduling(
-      userId: currentUser.id,
       spaceId: space.id,
       scheduledDate: formatDate(selectedDate!),
       startTime: formatTime(selectedStartTime!),

@@ -41,7 +41,6 @@ final AuthService authService = AuthService();
   }
 
   Future<Scheduling?> createScheduling({
-    required int userId,
     required int spaceId,
     required String scheduledDate,
     required String startTime,
@@ -56,7 +55,6 @@ final AuthService authService = AuthService();
         'Authorization': 'Bearer $token',
       },
       body: jsonEncode({
-        'userId': userId,
         'spaceId': spaceId,
         'scheduledDate': scheduledDate,
         'startTime': startTime,
