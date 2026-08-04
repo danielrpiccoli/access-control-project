@@ -5,6 +5,7 @@ import access_control.dto.AppUserResponseDTO;
 import access_control.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -22,8 +23,8 @@ public class AppUserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<AppUserResponseDTO>> getAllUsers() {
-        List<AppUserResponseDTO> response = appUserService.getAllUsers();
+    public ResponseEntity<List<AppUserResponseDTO>> getAllUsers(Authentication authentication) {
+        List<AppUserResponseDTO> response = appUserService.getAllUsers(authentication.getName());
         return ResponseEntity.ok(response);
     }
 

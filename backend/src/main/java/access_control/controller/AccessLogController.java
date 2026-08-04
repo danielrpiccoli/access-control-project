@@ -5,6 +5,7 @@ import access_control.dto.AccessLogResponseDTO;
 import access_control.service.AccessLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -22,8 +23,8 @@ public class AccessLogController {
     }
 
     @GetMapping
-    public ResponseEntity<List<AccessLogResponseDTO>> getAllAccessLogs() {
-        List<AccessLogResponseDTO> response = accessLogService.getAllAccessLogs();
+    public ResponseEntity<List<AccessLogResponseDTO>> getAllAccessLogs(Authentication authentication) {
+        List<AccessLogResponseDTO> response = accessLogService.getAllAccessLogs(authentication.getName());
         return ResponseEntity.ok(response);
     }
 

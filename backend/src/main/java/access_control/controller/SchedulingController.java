@@ -25,8 +25,8 @@ public class SchedulingController {
     }
 
     @GetMapping
-    public ResponseEntity<List<SchedulingResponseDTO>> getAllSchedulings() {
-        List<SchedulingResponseDTO> response = schedulingService.getAllSchedulings();
+    public ResponseEntity<List<SchedulingResponseDTO>> getAllSchedulings(Authentication authentication) {
+        List<SchedulingResponseDTO> response = schedulingService.getAllSchedulings(authentication.getName());
         return ResponseEntity.ok(response);
     }
 
