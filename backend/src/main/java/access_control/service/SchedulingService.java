@@ -58,8 +58,11 @@ public class SchedulingService {
         return response;
     }
 
-    public List<SchedulingResponseDTO> getAllSchedulings() {
-        List<Scheduling> schedulings = schedulingRepository.findAll();
+    public List<SchedulingResponseDTO> getAllSchedulings(String email) {
+        AppUser requester = appUserRepository.findByEmail(email);
+        List<Scheduling> schedulings = "ADMIN".equals(requester.getRole())
+                ? schedulingRepository.findAll()
+                : schedulingRepository.findByUser(requester);
         List<SchedulingResponseDTO> response = new ArrayList<>();
         for (Scheduling scheduling : schedulings) {
             SchedulingResponseDTO dto = new SchedulingResponseDTO();

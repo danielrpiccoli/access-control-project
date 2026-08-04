@@ -4,6 +4,7 @@ import access_control.dto.*;
 import access_control.entity.*;
 import access_control.mapper.SchedulingMapper;
 import access_control.repository.AccessLogRepository;
+import access_control.repository.AppUserRepository;
 import access_control.repository.SchedulingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,9 @@ public class AccessLogService {
 
     @Autowired
     private SchedulingRepository schedulingRepository;
+
+    @Autowired
+    private AppUserRepository appUserRepository;
 
     @Autowired
     private SchedulingMapper schedulingMapper;
@@ -41,8 +45,11 @@ public class AccessLogService {
         return response;
     }
     
-    public List<AccessLogResponseDTO> getAllAccessLogs() {
-        List<AccessLog> accessLogs = accessLogRepository.findAll();
+    public List<AccessLogResponseDTO> getAllAccessLogs(String email) {
+        AppUser requester = appUserRepository.findByEmail(email);
+        List<AccessLog> accessLogs = "ADMIN".equals(requester.getRole())
+                ? accessLogRepository.findAll()
+                : accessLogRepository.findByScheduling_User(requester);
         List<AccessLogResponseDTO> response = new ArrayList<>();
         for (AccessLog accessLog : accessLogs) {
             AccessLogResponseDTO dto = new AccessLogResponseDTO();

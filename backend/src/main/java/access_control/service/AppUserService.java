@@ -7,6 +7,7 @@ import access_control.entity.AppUser;
 import access_control.repository.AppUserRepository;
 import access_control.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -41,7 +42,11 @@ public class AppUserService {
         return response;
     }
 
-    public List<AppUserResponseDTO> getAllUsers() {
+    public List<AppUserResponseDTO> getAllUsers(String email) {
+        AppUser requester = appUserRepository.findByEmail(email);
+        if (!"ADMIN".equals(requester.getRole())) {
+            throw new AccessDeniedException("Only admins can list all users");
+        }
         List<AppUser> users = appUserRepository.findAll();
         List<AppUserResponseDTO> response = new ArrayList<>();
         for (AppUser user : users) {
