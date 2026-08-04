@@ -67,4 +67,20 @@ final AuthService authService = AuthService();
     }
     return null;
   }
+
+  Future<Scheduling?> cancelScheduling(int id) async {
+    final token = await authService.getToken();
+    final response = await http.put(
+      Uri.parse('$baseUrl/schedulings/$id/cancel'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return Scheduling.fromJson(jsonDecode(response.body));
+    }
+    return null;
+  }
 }

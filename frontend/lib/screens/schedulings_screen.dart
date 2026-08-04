@@ -40,6 +40,32 @@ class _SchedulingsScreenState extends State<SchedulingsScreen> {
     });
   }
 
+  Future<void> handleCancel(Scheduling scheduling) async {
+    final updated = await schedulingService.cancelScheduling(scheduling.id);
+
+    if (updated != null) {
+      setState(() {
+        schedulings = schedulings
+          .map((s) => s.id == updated.id ? updated : s)
+          .toList();
+      });
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Cancel Failed'),
+          content: const Text('Could not cancel this booking. Please try again.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Ok'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
   Future<void> handleEnter(Scheduling scheduling) async {
     final accessLog = await accessLogService.createAccessLog(
       schedulingId: scheduling.id,
@@ -103,12 +129,23 @@ class _SchedulingsScreenState extends State<SchedulingsScreen> {
                       ],
                     ),
                     isThreeLine: true,
-                    trailing: ElevatedButton(
-                      onPressed: () => handleEnter(scheduling),
-                      child: const Text('Enter'),
-                    ),
+                    trailing: scheduling.status == 'CANCELLED'
+                      ? const Text('Cancelled')
+                      : Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextButton(
+                              onPressed: () => handleCancel(scheduling),
+                              child: const Text('Cancel'),
+                            ),
+                            ElevatedButton(
+                              onPressed: () => handleEnter(scheduling),
+                              child: const Text('Enter'),
+                            ),
+                          ],
+                        ),
                   ),
-                ); 
+                );
               },
           ),
     );
